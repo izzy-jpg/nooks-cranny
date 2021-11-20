@@ -12,7 +12,7 @@ function App() {
   const [miscProduct, setMiscProduct] = useState([]);
 
 
-  // api call: houseware
+  // api call: housewares
   useEffect(() => {
     // in here we will call our api using axios
     axios({
@@ -52,28 +52,42 @@ function App() {
   }, [])
 
 
+
+
+
   return (
     <>
 
       {/* header begins */}
       <header>
-        <div className="headerNav">
-          <div className="logo">
-            <img src={"./assets/nooksCranny.png"} alt="the Nook's Cranny logo" />
+        <div className="headerTop">
+          <div className="wrapper headerNav">
+            <div className="logo">
+              <img src={"./assets/nooksCranny.png"} alt="the Nook's Cranny logo" />
+            </div>
+            {/* /logo */}
+            <nav>
+              <ul>
+                <li className="home"><a href="#" aria-label="Home"><FontAwesomeIcon icon={faHome} /></a></li>
+                <li><button className="search" aria-label="Search"><FontAwesomeIcon icon={faSearch} /></button></li>
+                <li><button className="cart"><img src={"./assets/cartIcon.png"} alt="Your shopping cart" /></button></li>
+              </ul>
+            </nav>
           </div>
-          {/* /logo */}
-          <nav>
-            <ul>
-              <li><a href="#" aria-label="Home"><FontAwesomeIcon icon={faHome} /></a></li>
-              <li><button className="search" aria-label="Search"><FontAwesomeIcon icon={faSearch} /></button></li>
-              <li><button className="cart"><img src={"./assets/cartIcon.png"} alt="Your shopping cart" /> </button></li>
-            </ul>
-          </nav>
+          {/* /wrapper */}
         </div>
         {/* /headerNav */}
-        <h1>Welcome to Nook's Cranny! <span className="cranny">(...cranny!)</span></h1>
-        <img src={"./assets/tommyAndTimmyBoxes.png"} alt="Tommy and Timmy Nook" />
-        <a href="#shop">Shop Now!</a>
+        <div className="headerImgTxt wrapper">
+          <div className="headerTxt">
+            <h1>Welcome to <span className="nooks">Nook's Cranny!</span> <span className="cranny">(...cranny!)</span></h1>
+            <a href="#shop" className="shopNow">Shop Now!</a>
+          </div>
+          {/* /headerText */}
+          <div className="headerImg">
+            <img src={"./assets/tommyAndTimmyBoxes.png"} alt="Tommy and Timmy Nook" />
+          </div>
+          {/* /headerImg */}
+        </div>
       </header>
       {/* header ends here */}
 
@@ -82,55 +96,58 @@ function App() {
 
       {/* main begins */}
       <main>
-        <div className="filterContainer">
+        <section className="filterContainer">
           <h2>Filters</h2>
           <button className="filterHouseware">Houseware</button>
           <button className="filterWallmounted">Wall Mounted</button>
           <button className="filterMisc">Miscellaneous</button>
-        </div>
+        </section>
         {/* /filterContainer */}
 
 
-        <div className="productContainer">
-        {/* renders the products to the page */}
-        {
-          housewares.map(item => {
-            return (
-              <Product
-                id={item["file-name"]}
-                name={item.name["name-USen"]}
-                imagePath={item.image_uri}
-                price={item["buy-price"]}
-              />
-            );
-          })
-        }
+        <section className="shopSection" id="shop">
+          <ul className="productContainer">
+            {/* renders the products to the page */}
+            {
+              housewares.map(item => {
+                return (
+                  <Product
+                    id={item["file-name"]}
+                    name={item.name["name-USen"]}
+                    imagePath={item.image_uri}
+                    price={item["buy-price"]}
+                  />
+                );
+              })
+            }
 
-        {
-          wallmounted.map(item => {
-            return (
-              <Product
-                id={item["file-name"]}
-                name={item.name["name-USen"]}
-                imagePath={item.image_uri}
-                price={item["buy-price"]} />
-            );
-          })
-        }
+            {
+              wallmounted.map(item => {
+                return (
+                  <Product
+                    id={item["file-name"]}
+                    name={item.name["name-USen"]}
+                    imagePath={item.image_uri}
+                    price={item["buy-price"]} />
+                );
+              })
+            }
 
-        {
-          miscProduct.map(item => {
-            return (
-              <Product
-                id={item["file-name"]}
-                name={item.name["name-USen"]}
-                imagePath={item.image_uri}
-                price={item["buy-price"]} />
-            );
-          })
-        }
-        </div>
-        {/* /productContainer */}
+            {
+              miscProduct.map(item => {
+                return (
+                  <Product
+                    id={item["file-name"]}
+                    name={item.name["name-USen"]}
+                    imagePath={item.image_uri}
+                    price={item["buy-price"]} />
+                );
+              })
+            }
+          </ul>
+          {/* /productContainer */}
+        </section>
+        {/* /shopSection #shop */}
       </main>
       {/* main ends */}
 

@@ -1,2 +1,161 @@
 /* App.css */
 
+html{line-height:1.15;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,footer,header,nav,section{display:block}h1{font-size:2em;margin:.67em 0}figcaption,figure,main{display:block}figure{margin:1em 40px}hr{box-sizing:content-box;height:0;overflow:visible}pre{font-family:monospace,monospace;font-size:1em}a{background-color:transparent;-webkit-text-decoration-skip:objects}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted}b,strong{font-weight:inherit}b,strong{font-weight:bolder}code,kbd,samp{font-family:monospace,monospace;font-size:1em}dfn{font-style:italic}mark{background-color:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}audio,video{display:inline-block}audio:not([controls]){display:none;height:0}img{border-style:none}svg:not(:root){overflow:hidden}button,input,optgroup,select,textarea{font-family:sans-serif;font-size:100%;line-height:1.15;margin:0}button,input{overflow:visible}button,select{text-transform:none}button,html [type=button],[type=reset],[type=submit]{-webkit-appearance:button}button::-moz-focus-inner,[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner{border-style:none;padding:0}button:-moz-focusring,[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring{outline:1px dotted ButtonText}fieldset{padding:.35em .75em .625em}legend{box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal}progress{display:inline-block;vertical-align:baseline}textarea{overflow:auto}[type=checkbox],[type=radio]{box-sizing:border-box;padding:0}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-cancel-button,[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}details,menu{display:block}summary{display:list-item}canvas{display:inline-block}template{display:none}[hidden]{display:none}
+
+html { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;}
+
+*, *:before, *:after {box-sizing: inherit}
+
+.srOnly { position: absolute; width: 1px; height: 1px; margin: -1px; border: 0; padding: 0; white-space: nowrap; clip-path: inset(100%); clip: rect(0 0 0 0); overflow: hidden;}
+/* end of setup snippet */
+
+
+.wrapper { 
+  max-width: 2000px; 
+  width: 85%; 
+  margin: 0 auto;
+}
+
+
+body{
+  font-family: 'signika', sans-serif;
+}
+
+img{
+  width: 100%;
+}
+
+li{
+  list-style: none;
+}
+
+a{
+  text-decoration: none;
+}
+
+
+
+
+
+
+/* header styles */
+header{
+  display: flex;
+  flex-direction: column;
+  background: #bee893;
+}
+
+nav{
+  width: 30%;
+}
+
+nav ul{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.headerTop{
+  background-color: #74e0aa;
+}
+
+nav button,
+.home{
+  background-color: #fbfeb2;
+  border: none;
+  border-radius: 50%;
+  font-size: 30px;
+  margin: 0;
+  height: 75px;
+  width: 75px;
+}
+
+nav button,
+.home a{
+  padding: 10px 15px;
+  color: #4b3c32;
+}
+
+button:hover{
+  cursor: pointer;
+}
+
+nav ul li{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.headerNav{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo{
+  width: 300px;
+}
+
+.cart{
+  width: 75px;
+  height: 75px;
+  padding: 5px 15px;
+}
+
+.headerImgTxt{
+  display: flex;
+  padding: 5% 0;
+}
+
+.headerTxt{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  width: 50%;
+}
+
+.headerImg{
+  width: 50%;
+}
+
+h1{
+  color: #c48d3f;
+  font-size: 64px;
+  text-shadow: 2px 2px #724910;
+}
+
+.nooks{
+  color: #724910;
+  display: block;
+  text-shadow: 2px 2px #c48d3f;
+}
+
+.cranny{
+  font-size: 30px;
+}
+
+.shopNow{
+  font-size: 30px;
+  background: #724910;
+  color: #74e0aa;
+  padding: 10px 20px;
+  border: 5px solid #74e0aa;
+  box-shadow: 15px 15px #74e0aa;
+  text-shadow: 1px 1px #bee893;
+}
+
+.shopNow:hover{
+  border: 5px solid #724910;
+  text-shadow: 1px 1px #c48d3f;
+  background: #74e0aa;
+  color: #724910;
+}
+
+.productImage{
+  width: 128px;
+}
+
+.bells{
+  width: 30px;
+}

@@ -1,8 +1,10 @@
 // Product.js
 
+import './App.css';
+
 function Product(props){
   return(
-    <div className="product" key={props.id}>
+    <li className="product" key={props.id}>
       <div className="productImage">
         <img src={props.imagePath} alt={props.name} />
       </div>
@@ -18,7 +20,7 @@ function Product(props){
       {/* /priceContainer */}
       <button className="moreInfo">more info</button>
       <button className="addToCart">add to cart</button>
-    </div>
+    </li>
     // product
   )
 };
