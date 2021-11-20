@@ -7,16 +7,16 @@ import { faSearch, faHome } from '@fortawesome/free-solid-svg-icons'
 import Product from './Product';
 
 function App() {
-  const [ housewares, setHousewares ] = useState([]);
-  const [ wallmounted, setWallmounted ] = useState([]);
-  const [ miscProduct, setMiscProduct ] = useState([]);
+  const [housewares, setHousewares] = useState([]);
+  const [wallmounted, setWallmounted] = useState([]);
+  const [miscProduct, setMiscProduct] = useState([]);
 
 
   // api call: houseware
   useEffect(() => {
     // in here we will call our api using axios
     axios({
-      url:'http://acnhapi.com/v1/houseware/',
+      url: 'http://acnhapi.com/v1/houseware/',
       method: 'GET',
       responseType: 'json'
     })
@@ -30,7 +30,7 @@ function App() {
   useEffect(() => {
     axios({
       url: 'http://acnhapi.com/v1/wallmounted/',
-      method:'GET',
+      method: 'GET',
       responseType: 'json'
     })
       .then(response => {
@@ -43,18 +43,19 @@ function App() {
   useEffect(() => {
     axios({
       url: 'http://acnhapi.com/v1/misc/',
-      method:'GET',
+      method: 'GET',
       responseType: 'json'
     })
       .then(response => {
         setMiscProduct([response.data.cute_music_player[0], response.data.fancy_violin[0], response.data.microwave[3], response.data.traditional_tea_set[1]])
-
       })
   }, [])
 
 
   return (
-    <div>
+    <>
+
+      {/* header begins */}
       <header>
         <div className="headerNav">
           <div className="logo">
@@ -63,56 +64,84 @@ function App() {
           {/* /logo */}
           <nav>
             <ul>
-              <li><a href="#" aria-label="Home"><FontAwesomeIcon icon={faHome}/></a></li>
-              <li><button className="search" aria-label="Search"><FontAwesomeIcon icon={faSearch}/></button></li>
-              <li><button className="cart"><img src={"./assets/cartIcon.png"} alt="Your shopping cart"/> </button></li>
+              <li><a href="#" aria-label="Home"><FontAwesomeIcon icon={faHome} /></a></li>
+              <li><button className="search" aria-label="Search"><FontAwesomeIcon icon={faSearch} /></button></li>
+              <li><button className="cart"><img src={"./assets/cartIcon.png"} alt="Your shopping cart" /> </button></li>
             </ul>
-          </nav> 
+          </nav>
         </div>
         {/* /headerNav */}
-      <h1>Welcome to Nook's Cranny! <span className="cranny">(...cranny!)</span></h1>
-      <img src={"./assets/tommyAndTimmyBoxes.png"} alt="Tommy and Timmy Nook" />
-      <a href="#shop">Shop Now!</a>
+        <h1>Welcome to Nook's Cranny! <span className="cranny">(...cranny!)</span></h1>
+        <img src={"./assets/tommyAndTimmyBoxes.png"} alt="Tommy and Timmy Nook" />
+        <a href="#shop">Shop Now!</a>
       </header>
+      {/* header ends here */}
 
-      {
-        housewares.map(item =>{
-          return(
-            <Product
-            id={item["file-name"]}
-            name={item.name["name-USen"]}
-            imagePath={item.image_uri}
-            price={item["buy-price"]}
-            />
-          )
-        })
-      }
 
-    {
-      wallmounted.map(item => {
-        return(
-          <Product 
-          id={item["file-name"]}
-          name={item.name["name-USen"]}
-          imagePath={item.image_uri}
-          price={item["buy-price"]}/>
-        )
-      })
-    }
 
-{
-      miscProduct.map(item => {
-        return(
-          <Product 
-          id={item["file-name"]}
-          name={item.name["name-USen"]}
-          imagePath={item.image_uri}
-          price={item["buy-price"]}/>
-        )
-      })
-    }
 
-    </div>
+      {/* main begins */}
+      <main>
+        <div className="filterContainer">
+          <h2>Filters</h2>
+          <button className="filterHouseware">Houseware</button>
+          <button className="filterWallmounted">Wall Mounted</button>
+          <button className="filterMisc">Miscellaneous</button>
+        </div>
+        {/* /filterContainer */}
+
+
+        <div className="productContainer">
+        {/* renders the products to the page */}
+        {
+          housewares.map(item => {
+            return (
+              <Product
+                id={item["file-name"]}
+                name={item.name["name-USen"]}
+                imagePath={item.image_uri}
+                price={item["buy-price"]}
+              />
+            );
+          })
+        }
+
+        {
+          wallmounted.map(item => {
+            return (
+              <Product
+                id={item["file-name"]}
+                name={item.name["name-USen"]}
+                imagePath={item.image_uri}
+                price={item["buy-price"]} />
+            );
+          })
+        }
+
+        {
+          miscProduct.map(item => {
+            return (
+              <Product
+                id={item["file-name"]}
+                name={item.name["name-USen"]}
+                imagePath={item.image_uri}
+                price={item["buy-price"]} />
+            );
+          })
+        }
+        </div>
+        {/* /productContainer */}
+      </main>
+      {/* main ends */}
+
+
+
+
+      {/* footer begins */}
+      <footer>
+        <p>Created at <a href="https://junocollege.com/" className="juno">Juno College</a></p>
+      </footer>
+    </>
   );
 }
 
