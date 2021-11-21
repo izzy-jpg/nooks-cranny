@@ -57,6 +57,9 @@ nav ul{
 
 .headerTop{
   background-color: #74e0aa;
+  position: fixed;
+  width: 100%;
+  height: 150px;
 }
 
 nav button,
@@ -68,6 +71,7 @@ nav button,
   margin: 0;
   height: 75px;
   width: 75px;
+  border: 5px solid #fbfeb2;
 }
 
 nav button,
@@ -76,8 +80,12 @@ nav button,
   color: #4b3c32;
 }
 
-button:hover{
+nav button:hover,
+nav button:focus,
+.home:hover,
+.home:focus-within{
   cursor: pointer;
+  border: 5px solid #4b3c32;
 }
 
 nav ul li{
@@ -104,7 +112,7 @@ nav ul li{
 
 .headerImgTxt{
   display: flex;
-  padding: 5% 0;
+  padding: 150px 0 5% 0;
 }
 
 .headerTxt{
@@ -152,10 +160,60 @@ h1{
   color: #724910;
 }
 
+
+
+
+
+
+
+
+
+
+/* main styles */
+
+/* main{
+  background-image: url("./assets/woodGrain.jpg");
+} */
+
+.mainSection{
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+}
+
+.productContainer{
+  display: grid;
+  width: 100%;
+  gap: 2.5% 5%;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  padding-top: 5%;
+}
+
+.product{
+  border: 2px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.product p,
+.product h3{
+  margin: 0;
+}
+
+.product h3{
+  text-transform: capitalize;
+}
+
 .productImage{
   width: 128px;
 }
 
 .bells{
   width: 30px;
+}
+
+.priceContainer{
+  display: flex;
+  align-items: center;
 }

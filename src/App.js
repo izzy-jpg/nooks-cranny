@@ -96,17 +96,21 @@ function App() {
 
       {/* main begins */}
       <main>
-        <section className="filterContainer">
+        <div className="mainSection wrapper">
+        <section className="filterSection">
+          <div className="filterContainer">
           <h2>Filters</h2>
           <button className="filterHouseware">Houseware</button>
           <button className="filterWallmounted">Wall Mounted</button>
           <button className="filterMisc">Miscellaneous</button>
+          </div>
         </section>
         {/* /filterContainer */}
 
 
         <section className="shopSection" id="shop">
-          <ul className="productContainer">
+          <h2>Items For Sale</h2>
+          <ul className="productContainer wrapper">
             {/* renders the products to the page */}
             {
               housewares.map(item => {
@@ -148,6 +152,8 @@ function App() {
           {/* /productContainer */}
         </section>
         {/* /shopSection #shop */}
+        </div>
+        {/* /mainSection /wrapper */}
       </main>
       {/* main ends */}
 

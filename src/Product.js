@@ -9,7 +9,7 @@ function Product(props){
         <img src={props.imagePath} alt={props.name} />
       </div>
       {/* /productImage */}
-      <p className="productName">{props.name}</p>
+      <h3 className="productName">{props.name}</h3>
       <div className="priceContainer">
         <div className="bells">
           <img src="./assets/bells.png" alt="bells" />
