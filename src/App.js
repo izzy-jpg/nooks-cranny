@@ -16,7 +16,7 @@ function App() {
   useEffect(() => {
     // in here we will call our api using axios
     axios({
-      url: 'http://acnhapi.com/v1/houseware/',
+      url: 'https://acnhapi.com/v1/houseware/',
       method: 'GET',
       responseType: 'json'
     })
@@ -29,7 +29,7 @@ function App() {
   // api call: wallmounted
   useEffect(() => {
     axios({
-      url: 'http://acnhapi.com/v1/wallmounted/',
+      url: 'https://acnhapi.com/v1/wallmounted/',
       method: 'GET',
       responseType: 'json'
     })
@@ -42,7 +42,7 @@ function App() {
   // api call: misc
   useEffect(() => {
     axios({
-      url: 'http://acnhapi.com/v1/misc/',
+      url: 'https://acnhapi.com/v1/misc/',
       method: 'GET',
       responseType: 'json'
     })
