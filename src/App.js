@@ -68,7 +68,7 @@ function App() {
             {/* /logo */}
             <nav>
               <ul>
-                <li className="home"><a href="#" aria-label="Home"><FontAwesomeIcon icon={faHome} /></a></li>
+                <li className="home"><a href="#topOfPage" aria-label="Home"><FontAwesomeIcon icon={faHome} /></a></li>
                 <li><button className="search" aria-label="Search"><FontAwesomeIcon icon={faSearch} /></button></li>
                 <li><button className="cart"><img src={"./assets/cartIcon.png"} alt="Your shopping cart" /></button></li>
               </ul>
@@ -77,7 +77,7 @@ function App() {
           {/* /wrapper */}
         </div>
         {/* /headerNav */}
-        <div className="headerImgTxt wrapper">
+        <div className="headerImgTxt wrapper" id="topOfPage">
           <div className="headerTxt">
             <h1>Welcome to <span className="nooks">Nook's Cranny!</span> <span className="cranny">(...cranny!)</span></h1>
             <a href="#shop" className="shopNow">Shop Now!</a>
