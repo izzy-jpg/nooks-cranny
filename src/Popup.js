@@ -8,7 +8,6 @@ function Popup(props) {
         {props.content}
       </div>
       {/* /moreInfoBox */}
-      <button className="addToCart">add to cart</button>
     </div>
     // /popup
   )

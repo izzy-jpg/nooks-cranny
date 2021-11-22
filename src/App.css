@@ -9,6 +9,11 @@ html { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: 
 .srOnly { position: absolute; width: 1px; height: 1px; margin: -1px; border: 0; padding: 0; white-space: nowrap; clip-path: inset(100%); clip: rect(0 0 0 0); overflow: hidden;}
 /* end of setup snippet */
 
+@font-face {
+  font-family: 'Humming';
+  src: local('Humming'), url(./HummingFont.otf) format('opentype');
+}
+
 
 .wrapper { 
   max-width: 2000px; 
@@ -19,7 +24,7 @@ html { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: 
 
 body,
 button{
-  font-family: 'signika', sans-serif;
+  font-family: 'humming', sans-serif;
 }
 
 img{
@@ -211,6 +216,7 @@ main{
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
   background-color: #aae0e4;
   border-radius: 20px;
 }
@@ -277,10 +283,14 @@ main{
 }
 
 .popup{
-  position: absolute;
-  background: #aae0e4;
+  position: fixed;
+  background: #fbfeb2;
+  border-radius: 20px;
+  padding: 20px;
   width: 50%;
   height: 50%;
+  top: 25%;
+  left: 25%;
 }
 
 .moreInfoBox{
@@ -295,6 +305,17 @@ main{
   border: none;
   font-size: 40px;
   align-self: flex-end;
+}
+
+.popup .addToCart{
+  border-radius: 0;
+  border: 5px solid white;
+  margin-top: 20px;
+}
+
+.popup .addToCart:hover,
+.popup .addToCart:focus{
+  border: 5px solid #4b3c32
 }
 
 

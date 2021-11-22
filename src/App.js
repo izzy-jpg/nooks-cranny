@@ -21,7 +21,8 @@ function App() {
       responseType: 'json'
     })
       .then(response => {
-        setHousewares([response.data.yucca[0], response.data.cat_tower[4], response.data["throwback_race-car_bed"][1], response.data.pinball_machine[1]]);
+        const item = response.data
+        setHousewares([item.yucca[0], item.cat_tower[4], item["throwback_race-car_bed"][1], item.pinball_machine[1]]);
       });
   }, []);
 
@@ -34,7 +35,8 @@ function App() {
       responseType: 'json'
     })
       .then(response => {
-        setWallmounted([response.data.cuckoo_clock[3], response.data.air_conditioner[2], response.data.corkboard[3], response.data.pot_rack[2]])
+        const item = response.data
+        setWallmounted([item.cuckoo_clock[3], item.air_conditioner[2], item.corkboard[3], item.pot_rack[2]])
       })
   }, [])
 
@@ -46,7 +48,9 @@ function App() {
       responseType: 'json'
     })
       .then(response => {
-        setMiscProduct([response.data.cute_music_player[0], response.data.fancy_violin[0], response.data.microwave[3], response.data.traditional_tea_set[1]])
+        const item = response.data
+        console.log(item)
+        setMiscProduct([item.cute_music_player[0], item.fancy_violin[0], item.microwave[3], item.traditional_tea_set[1]])
       })
   }, [])
 
@@ -102,6 +106,7 @@ function App() {
           <div className="filterContainer">
           <h2>Filters</h2>
           <div className="filters">
+            <button className="filterAll">All</button>
           <button className="filterHouseware">Houseware</button>
           <button className="filterWallmounted">Wall Mounted</button>
           <button className="filterMisc">Miscellaneous</button>
@@ -125,8 +130,10 @@ function App() {
                     imagePath={item.image_uri}
                     price={item["buy-price"]}
                     size={item.size}
-                    sellPrice={item["sell-price"]}
                     colour={item.variant}
+                    tag={item.tag}
+                    sellPrice={item["sell-price"]}
+                    type="houseware"
                   />
                 );
               })
@@ -141,8 +148,10 @@ function App() {
                     imagePath={item.image_uri}
                     price={item["buy-price"]}
                     size={item.size}
-                    sellPrice={item["sell-price"]}
                     colour={item.variant}
+                    tag={item.tag}
+                    sellPrice={item["sell-price"]}
+                    type="wallmounted"
                   />
                 );
               })
@@ -157,8 +166,10 @@ function App() {
                     imagePath={item.image_uri}
                     price={item["buy-price"]} 
                     size={item.size}
-                    sellPrice={item["sell-price"]}
                     colour={item.variant}
+                    tag={item.tag}
+                    sellPrice={item["sell-price"]}
+                    type="misc"
                   />
                 );
               })
@@ -179,6 +190,7 @@ function App() {
       <footer>
         <p>Created at <a href="https://junocollege.com/" className="juno">Juno College</a></p>
       </footer>
+      {/* footer ends */}
     </>
   );
 }

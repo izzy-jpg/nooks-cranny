@@ -21,7 +21,7 @@ function Product(props) {
       <div className="productImage">
         <img src={props.imagePath} alt={props.name} />
       </div>
-      {/* /productImage */}
+      {/* /imgButton */}
       <h3 className="productName">{props.name}</h3>
       <div className="priceContainer">
         <div className="bells">
@@ -37,10 +37,14 @@ function Product(props) {
         isOpen && <Popup
           content={
             <>
-              <div className="productImage">
-                <img src={props.imagePath} alt={props.name} />
+              <div className="imgButton">
+                <div className="productImage">
+                  <img src={props.imagePath} alt={props.name} />
+                </div>
+                {/* /productImage */}
+                <button className="addToCart">add to cart</button>
               </div>
-              {/* /productImage */}
+              {/* /imgButton */}
               <div className="productInfo">
                 <h3 className="productName">{props.name}</h3>
                 <div className="priceContainer">
@@ -54,6 +58,7 @@ function Product(props) {
                 <div className="extraInfo">
                   <p>Size: {props.size}</p>
                   <p>Colour: {props.colour}</p>
+                  <p>Tagged: {props.tag}</p>
                   <div className="priceContainer">
                     <p>Sells for: </p>
                     <div className="bells">
