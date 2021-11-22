@@ -21,7 +21,7 @@ function App() {
       responseType: 'json'
     })
       .then(response => {
-        setHousewares([response.data.yucca[0], response.data.cat_tower[4], response.data.jukebox[0], response.data.pinball_machine[1]]);
+        setHousewares([response.data.yucca[0], response.data.cat_tower[4], response.data["throwback_race-car_bed"][1], response.data.pinball_machine[1]]);
       });
   }, []);
 
@@ -34,8 +34,7 @@ function App() {
       responseType: 'json'
     })
       .then(response => {
-        setWallmounted([response.data.pendulum_clock[0], response.data.air_conditioner[2], response.data.world_map[1], response.data.pot_rack[2]])
-
+        setWallmounted([response.data.cuckoo_clock[3], response.data.air_conditioner[2], response.data.corkboard[3], response.data.pot_rack[2]])
       })
   }, [])
 
@@ -50,6 +49,8 @@ function App() {
         setMiscProduct([response.data.cute_music_player[0], response.data.fancy_violin[0], response.data.microwave[3], response.data.traditional_tea_set[1]])
       })
   }, [])
+
+
 
 
 
@@ -100,9 +101,12 @@ function App() {
         <section className="filterSection">
           <div className="filterContainer">
           <h2>Filters</h2>
+          <div className="filters">
           <button className="filterHouseware">Houseware</button>
           <button className="filterWallmounted">Wall Mounted</button>
           <button className="filterMisc">Miscellaneous</button>
+          </div>
+          {/* /filters */}
           </div>
         </section>
         {/* /filterContainer */}
@@ -120,6 +124,9 @@ function App() {
                     name={item.name["name-USen"]}
                     imagePath={item.image_uri}
                     price={item["buy-price"]}
+                    size={item.size}
+                    sellPrice={item["sell-price"]}
+                    colour={item.variant}
                   />
                 );
               })
@@ -132,7 +139,11 @@ function App() {
                     id={item["file-name"]}
                     name={item.name["name-USen"]}
                     imagePath={item.image_uri}
-                    price={item["buy-price"]} />
+                    price={item["buy-price"]}
+                    size={item.size}
+                    sellPrice={item["sell-price"]}
+                    colour={item.variant}
+                  />
                 );
               })
             }
@@ -144,7 +155,11 @@ function App() {
                     id={item["file-name"]}
                     name={item.name["name-USen"]}
                     imagePath={item.image_uri}
-                    price={item["buy-price"]} />
+                    price={item["buy-price"]} 
+                    size={item.size}
+                    sellPrice={item["sell-price"]}
+                    colour={item.variant}
+                  />
                 );
               })
             }

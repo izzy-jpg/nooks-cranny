@@ -17,7 +17,8 @@ html { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: 
 }
 
 
-body{
+body,
+button{
   font-family: 'signika', sans-serif;
 }
 
@@ -33,6 +34,10 @@ a{
   text-decoration: none;
 }
 
+button{
+  cursor: pointer;
+}
+
 
 
 
@@ -42,7 +47,7 @@ a{
 header{
   display: flex;
   flex-direction: column;
-  background: #bee893;
+  background: #aae0e4;
 }
 
 nav{
@@ -60,6 +65,7 @@ nav ul{
   position: fixed;
   width: 100%;
   height: 150px;
+  z-index: 2;
 }
 
 nav button,
@@ -72,6 +78,7 @@ nav button,
   height: 75px;
   width: 75px;
   border: 5px solid #fbfeb2;
+  transition: 0.4s ease-in-out;
 }
 
 nav button,
@@ -83,7 +90,8 @@ nav button,
 nav button:hover,
 nav button:focus,
 .home:hover,
-.home:focus-within{
+.home:focus-within,
+.home:focus{
   cursor: pointer;
   border: 5px solid #4b3c32;
 }
@@ -151,6 +159,7 @@ h1{
   border: 5px solid #74e0aa;
   box-shadow: 15px 15px #74e0aa;
   text-shadow: 1px 1px #bee893;
+  transition: 0.4s ease-in-out;
 }
 
 .shopNow:hover{
@@ -158,6 +167,7 @@ h1{
   text-shadow: 1px 1px #c48d3f;
   background: #74e0aa;
   color: #724910;
+  box-shadow: 15px 15px #724910;
 }
 
 
@@ -180,6 +190,12 @@ h1{
   grid-template-columns: 1fr 4fr;
 }
 
+main{
+  background: #bee893;
+  padding-top: 5%;
+  color: #4b3c32;
+}
+
 .productContainer{
   display: grid;
   width: 100%;
@@ -187,13 +203,16 @@ h1{
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(5, 1fr);
   padding-top: 5%;
+  
 }
 
 .product{
-  border: 2px solid black;
+  border: 2px solid #4b3c32;
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: #aae0e4;
+  border-radius: 20px;
 }
 
 .product p,
@@ -216,4 +235,109 @@ h1{
 .priceContainer{
   display: flex;
   align-items: center;
+}
+
+.addToCart {
+  width: 100%;
+  border: none;
+  padding: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: white;
+  text-shadow: 1px 1px black;
+  background-color: #74e0aa;
+  transition: 0.4s ease-in-out;
+  border-radius: 0 0 20px 20px;
+}
+
+.addToCart:hover,
+.addToCart:focus{
+  background-color: #bee893;
+  color: #4b3c32;
+  text-shadow: 1px 1px white;
+}
+
+.moreInfo{
+  align-self: flex-end;
+  padding: 5px;
+  background-color: #bee893;
+  color: #4b3c32;
+  text-shadow: 1px 1px white;
+  border: 3px solid #4b3c32;
+  transition: 0.4s ease-in-out;
+}
+
+.moreInfo:hover,
+.moreInfo:focus{
+  color: white;
+  background-color: #74e0aa;
+  text-shadow: 1px 1px black;
+  border: 3px solid white;
+}
+
+.popup{
+  position: absolute;
+  background: #aae0e4;
+  width: 50%;
+  height: 50%;
+}
+
+.moreInfoBox{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+
+.closeBox{
+  background: none;
+  border: none;
+  font-size: 40px;
+  align-self: flex-end;
+}
+
+
+.filters{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  border-right: 2px solid #4b3c32;
+}
+
+.filterContainer button{
+  background-color: #bee893;
+  border: none;
+  margin: 10px;
+}
+
+
+
+
+/* footer styles */
+footer{
+  background: #74e0aa;
+  padding: 2%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+footer p{
+  text-align: center;
+  text-transform: uppercase;
+  margin: 0;
+  color: #724910;
+  text-shadow: 1px 1px #4b3c32;
+}
+
+footer a{
+  color: #4b3c32;
+  text-shadow: 2px 2px #c48d3f;
+}
+
+footer a:hover,
+footer a:focus{
+  color: #c48d3f;
+  text-shadow: 2px 2px #4b3c32;
 }
