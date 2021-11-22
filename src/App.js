@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch, faHome } from '@fortawesome/free-solid-svg-icons'
 
 import Product from './Product';
+import FilterForm from './FilterForm';
 
 function App() {
   const [housewares, setHousewares] = useState([]);
@@ -21,8 +22,17 @@ function App() {
       responseType: 'json'
     })
       .then(response => {
-        const item = response.data
-        setHousewares([item.yucca[0], item.cat_tower[4], item["throwback_race-car_bed"][1], item.pinball_machine[1]]);
+        const item = response.data;
+
+        // creates array of the items we want to use from the response
+        const itemArray = ([item.yucca[0], item.cat_tower[4], item["throwback_race-car_bed"][1], item.pinball_machine[1]]);
+
+        // adds a new property so we can filter them later
+        const withType = itemArray.map(piece => {
+          return { ...piece, type: "houseware" };
+        })
+        // sets state of housewares
+        setHousewares(withType);
       });
   }, []);
 
@@ -36,7 +46,17 @@ function App() {
     })
       .then(response => {
         const item = response.data
-        setWallmounted([item.cuckoo_clock[3], item.air_conditioner[2], item.corkboard[3], item.pot_rack[2]])
+
+        // creates array of the items we want to use from the response
+        const itemArray = ([item.cuckoo_clock[3], item.air_conditioner[2], item.corkboard[3], item.pot_rack[2]])
+
+        // adds a new property so we can filter them later
+        const withType = itemArray.map(piece => {
+          return { ...piece, type: "wallmounted" };
+        })
+
+        // sets state of wallmounted
+        setWallmounted(withType)
       })
   }, [])
 
@@ -49,8 +69,17 @@ function App() {
     })
       .then(response => {
         const item = response.data
-        console.log(item)
-        setMiscProduct([item.cute_music_player[0], item.fancy_violin[0], item.microwave[3], item.traditional_tea_set[1]])
+        
+        // creates array of the items we want to use from the response
+        const itemArray = ([item.cute_music_player[0], item.fancy_violin[0], item.microwave[3], item.traditional_tea_set[1]]);
+
+        // adds a new property so we can filter them later
+        const withType = itemArray.map(piece => {
+          return { ...piece, type: "misc" };
+        })
+
+        // sets state of wallmounted
+        setMiscProduct(withType)
       })
   }, [])
 
@@ -102,82 +131,72 @@ function App() {
       {/* main begins */}
       <main>
         <div className="mainSection wrapper">
-        <section className="filterSection">
-          <div className="filterContainer">
-          <h2>Filters</h2>
-          <div className="filters">
-            <button className="filterAll">All</button>
-          <button className="filterHouseware">Houseware</button>
-          <button className="filterWallmounted">Wall Mounted</button>
-          <button className="filterMisc">Miscellaneous</button>
-          </div>
-          {/* /filters */}
-          </div>
-        </section>
-        {/* /filterContainer */}
+          <section className="filterSection">
+            <FilterForm />
+          </section>
+          {/* filterSection */}
 
+          <section className="shopSection" id="shop">
+            <h2>Items For Sale</h2>
+            <ul className="productContainer wrapper">
+              {/* renders the products to the page */}
+              {
+                housewares.map(item => {
+                  return (
+                    <Product
+                      id={item["file-name"]}
+                      name={item.name["name-USen"]}
+                      imagePath={item.image_uri}
+                      price={item["buy-price"]}
+                      size={item.size}
+                      colour={item.variant}
+                      tag={item.tag}
+                      sellPrice={item["sell-price"]}
+                      type="houseware"
+                    />
+                  );
+                })
+              }
 
-        <section className="shopSection" id="shop">
-          <h2>Items For Sale</h2>
-          <ul className="productContainer wrapper">
-            {/* renders the products to the page */}
-            {
-              housewares.map(item => {
-                return (
-                  <Product
-                    id={item["file-name"]}
-                    name={item.name["name-USen"]}
-                    imagePath={item.image_uri}
-                    price={item["buy-price"]}
-                    size={item.size}
-                    colour={item.variant}
-                    tag={item.tag}
-                    sellPrice={item["sell-price"]}
-                    type="houseware"
-                  />
-                );
-              })
-            }
+              {
+                wallmounted.map(item => {
+                  return (
+                    <Product
+                      id={item["file-name"]}
+                      name={item.name["name-USen"]}
+                      imagePath={item.image_uri}
+                      price={item["buy-price"]}
+                      size={item.size}
+                      colour={item.variant}
+                      tag={item.tag}
+                      sellPrice={item["sell-price"]}
+                      type="wallmounted"
+                    />
+                  );
+                })
+              }
 
-            {
-              wallmounted.map(item => {
-                return (
-                  <Product
-                    id={item["file-name"]}
-                    name={item.name["name-USen"]}
-                    imagePath={item.image_uri}
-                    price={item["buy-price"]}
-                    size={item.size}
-                    colour={item.variant}
-                    tag={item.tag}
-                    sellPrice={item["sell-price"]}
-                    type="wallmounted"
-                  />
-                );
-              })
-            }
-
-            {
-              miscProduct.map(item => {
-                return (
-                  <Product
-                    id={item["file-name"]}
-                    name={item.name["name-USen"]}
-                    imagePath={item.image_uri}
-                    price={item["buy-price"]} 
-                    size={item.size}
-                    colour={item.variant}
-                    tag={item.tag}
-                    sellPrice={item["sell-price"]}
-                    type="misc"
-                  />
-                );
-              })
-            }
-          </ul>
-          {/* /productContainer */}
-        </section>
-        {/* /shopSection #shop */}
+              {
+                miscProduct.map(item => {
+                  return (
+                    <Product
+                      id={item["file-name"]}
+                      name={item.name["name-USen"]}
+                      imagePath={item.image_uri}
+                      price={item["buy-price"]}
+                      size={item.size}
+                      colour={item.variant}
+                      tag={item.tag}
+                      sellPrice={item["sell-price"]}
+                      type="misc"
+                    />
+                  );
+                })
+              }
+            </ul>
+            {/* /productContainer */}
+          </section>
+          {/* /shopSection #shop */}
         </div>
         {/* /mainSection /wrapper */}
       </main>

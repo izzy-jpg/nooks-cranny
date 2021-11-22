@@ -36,9 +36,10 @@ function Product(props) {
         <button className="addToCart">Add to cart</button>
       </div>
       {/* /buttonContainer */}
-      {
-        isOpen && <Popup
-          content={
+
+      {/* when isOpen=true, show Popup */}
+      {isOpen ? 
+      <Popup content={
             <>
               <div className="imgButton">
                 <div className="productImage">
@@ -78,7 +79,9 @@ function Product(props) {
             </>
           }
           handleClose={toggleMoreInfo}
-        />
+        /> 
+        // otherwise, show nothing
+        : null
       }
     </li>
     // product
