@@ -224,6 +224,7 @@ main{
 .product p,
 .product h3{
   margin: 0;
+  text-align: center;
 }
 
 .product h3{
@@ -265,7 +266,6 @@ main{
 }
 
 .moreInfo{
-  align-self: flex-end;
   padding: 5px;
   background-color: #bee893;
   color: #4b3c32;
@@ -299,12 +299,16 @@ main{
   align-items: center;
 }
 
+.moreInfoBox h3,
+.moreInfoBox p{
+  text-align: left;
+}
+
 
 .closeBox{
   background: none;
   border: none;
   font-size: 40px;
-  align-self: flex-end;
 }
 
 .popup .addToCart{
@@ -346,7 +350,6 @@ footer{
 
 footer p{
   text-align: center;
-  text-transform: uppercase;
   margin: 0;
   color: #724910;
   text-shadow: 1px 1px #4b3c32;

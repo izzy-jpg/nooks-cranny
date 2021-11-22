@@ -31,8 +31,11 @@ function Product(props) {
         <p className="price">{props.price}</p>
       </div>
       {/* /priceContainer */}
-      <button className="moreInfo" onClick={toggleMoreInfo}>more info</button>
-      <button className="addToCart">Add to cart</button>
+      <div className="buttonContainer">
+        <button className="moreInfo" onClick={toggleMoreInfo}>more info</button>
+        <button className="addToCart">Add to cart</button>
+      </div>
+      {/* /buttonContainer */}
       {
         isOpen && <Popup
           content={
