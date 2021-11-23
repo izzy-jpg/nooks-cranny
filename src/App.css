@@ -205,14 +205,18 @@ main{
   color: #4b3c32;
 }
 
+
+.shopSection h2{
+  padding-left: 5%;
+}
+
 .productContainer{
   display: grid;
   width: 100%;
   gap: 2.5% 5%;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(5, 1fr);
-  padding-top: 5%;
-  
+  grid-template-rows: repeat(auto-fit, 1fr);
+  padding: 5% 0 10% 5%;
 }
 
 .product{
@@ -231,6 +235,7 @@ main{
   text-align: center;
   text-transform: capitalize;
 }
+
 
 
 .productImage{
@@ -267,7 +272,8 @@ main{
   text-shadow: 1px 1px white;
 }
 
-.moreInfo{
+.moreInfo,
+.formButton{
   padding: 5px;
   background-color: #bee893;
   color: #4b3c32;
@@ -277,7 +283,9 @@ main{
 }
 
 .moreInfo:hover,
-.moreInfo:focus{
+.moreInfo:focus,
+.formButton:hover,
+.formButton:focus{
   color: white;
   background-color: #74e0aa;
   text-shadow: 1px 1px black;
@@ -324,6 +332,9 @@ main{
   border: 5px solid #4b3c32
 }
 
+.filterSection {
+  padding-bottom: 20%;
+}
 
 .filters{
   display: flex;
@@ -339,6 +350,10 @@ input[type="radio"]{
 
 input[type="radio"]:checked+label{
   font-weight: bold;
+}
+
+.formButton{
+  margin: 10px 0;
 }
 
 

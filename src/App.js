@@ -2,7 +2,6 @@
 
 // imports
 import './App.css';
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch, faHome } from '@fortawesome/free-solid-svg-icons'
@@ -13,7 +12,27 @@ import FilterForm from './FilterForm';
 // app function
 function App() {
   // setting states
-  const [allProducts, setAllProducts] = useState([])
+  const [allProducts, setAllProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+
+
+  const getProducts = (e, type) => {
+
+    e.preventDefault()
+    // create a copy of allProducts
+    const copyOfAllProducts = [...allProducts];
+
+    if (type === "all") {
+      setFilteredProducts(copyOfAllProducts);
+    } else{
+    // loop over it using filter()
+    const productsFiltered = copyOfAllProducts.filter(eachProduct => {
+      // return only products that match
+      return eachProduct.type === type;
+    })
+    setFilteredProducts(productsFiltered);
+    };
+  }
 
 
   // api calls
@@ -53,6 +72,7 @@ function App() {
         const miscWithType = miscArray.map(item => {
           return { ...item, type: "misc" };
         });
+        console.log(housewareWithType)
 
         // combines all [type]withType arrays into one
         const allWithType = [...housewareWithType, ...wallmountedWithType, ...miscWithType]
@@ -113,7 +133,7 @@ function App() {
       <main>
         <div className="mainSection wrapper">
           <section className="filterSection">
-            <FilterForm />
+            <FilterForm getProducts={getProducts}/>
           </section>
           {/* filterSection */}
 
@@ -122,7 +142,7 @@ function App() {
             <ul className="productContainer wrapper">
 
               {/* renders the products to the page */}
-              {allProducts.map(item => {
+              {filteredProducts.map(item => {
                 return (
                   <Product product={item} key={item["file-name"]} />
                 )
