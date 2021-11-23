@@ -8,27 +8,26 @@ function Product(props) {
 
   const toggleMoreInfo = () => {
     setIsOpen(!isOpen);
-    console.log(isOpen)
   }
 
-
+  const item = props.product;
 
 
 
   return (
     // posts products to the page
-    <li className="product" key={props.id}>
+    <li className="product" key={item["file-name"]}>
       <div className="productImage">
-        <img src={props.imagePath} alt={props.name} />
+        <img src={item.image_uri} alt={item.name["name-USen"]} />
       </div>
       {/* /imgButton */}
-      <h3 className="productName">{props.name}</h3>
+      <h3 className="productName">{item.name["name-USen"]}</h3>
       <div className="priceContainer">
         <div className="bells">
           <img src="./assets/bells.png" alt="bells" />
         </div>
         {/* /bells */}
-        <p className="price">{props.price}</p>
+        <p className="price">{item["buy-price"]}</p>
       </div>
       {/* /priceContainer */}
       <div className="buttonContainer">
@@ -43,33 +42,33 @@ function Product(props) {
             <>
               <div className="imgButton">
                 <div className="productImage">
-                  <img src={props.imagePath} alt={props.name} />
+                  <img src={item.image_uri} alt={item.name["name-USen"]} />
                 </div>
                 {/* /productImage */}
                 <button className="addToCart">add to cart</button>
               </div>
               {/* /imgButton */}
               <div className="productInfo">
-                <h3 className="productName">{props.name}</h3>
+                <h3 className="productName">{item.name["name-USen"]}</h3>
                 <div className="priceContainer">
                   <div className="bells">
                     <img src="./assets/bells.png" alt="bells" />
                   </div>
                   {/* /bells */}
-                  <p className="price">{props.price}</p>
+                  <p className="price">{item["buy-price"]}</p>
                 </div>
                 {/* /priceContainer */}
                 <div className="extraInfo">
-                  <p>Size: {props.size}</p>
-                  <p>Colour: {props.colour}</p>
-                  <p>Tagged: {props.tag}</p>
+                  <p>Category: {item.type}</p>
+                  <p>Size: {item.size}</p>
+                  <p>Tagged: {item.tag}</p>
                   <div className="priceContainer">
                     <p>Sells for: </p>
                     <div className="bells">
                       <img src="./assets/bells.png" alt="bells" />
                     </div>
                     {/* /bells */}
-                    <p className="price">{props.sellPrice}</p>
+                    <p className="price">{item["sell-price"]}</p>
                   </div>
                   {/* /priceContainer */}
                 </div>

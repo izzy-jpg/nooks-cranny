@@ -1,18 +1,32 @@
 // FilterForm.js
+import { useState } from 'react';
 
 function FilterForm() {
+
+  const [userChoice, setUserChoice] = useState("all")
+
+  const handleUserChoice = (e) => {
+    setUserChoice(e.target.value)
+    console.log(e.target.value)
+  }
+
+
   return (
     <>
-      <div className="filterContainer">
+      <form className="filterContainer" onChange={handleUserChoice}>
         <h2>Filters</h2>
         <div className="filters">
-          <button className="filterAll">All</button>
-          <button className="filterHouseware">Houseware</button>
-          <button className="filterWallmounted">Wall Mounted</button>
-          <button className="filterMisc">Miscellaneous</button>
+          <input type="radio" name="filter" id="all" value="all" defaultChecked />
+          <label htmlFor="all">All</label>
+          <input type="radio" name="filter" id="houseware" value="houseware" />
+          <label htmlFor="houseware">Houseware</label>
+          <input type="radio" name="filter" id="wallmounted" value="wallmounted" />
+          <label htmlFor="wallmounted">Wallmounted</label>
+          <input type="radio" name="filter" id="misc" value="misc" />
+          <label htmlFor="misc">Miscellaneous</label>
         </div>
         {/* /filters */}
-      </div>
+      </form>
       {/* /filterContainer */}
     </>
   )

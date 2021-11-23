@@ -1,3 +1,6 @@
+// App.js
+
+// imports
 import './App.css';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
@@ -7,88 +10,63 @@ import { faSearch, faHome } from '@fortawesome/free-solid-svg-icons'
 import Product from './Product';
 import FilterForm from './FilterForm';
 
+// app function
 function App() {
-  const [housewares, setHousewares] = useState([]);
-  const [wallmounted, setWallmounted] = useState([]);
-  const [miscProduct, setMiscProduct] = useState([]);
+  // setting states
+  const [allProducts, setAllProducts] = useState([])
 
 
-  // api call: housewares
+  // api calls
   useEffect(() => {
-    // in here we will call our api using axios
-    axios({
-      url: 'https://acnhapi.com/v1/houseware/',
-      method: 'GET',
-      responseType: 'json'
-    })
-      .then(response => {
-        const item = response.data;
 
-        // creates array of the items we want to use from the response
-        const itemArray = ([item.yucca[0], item.cat_tower[4], item["throwback_race-car_bed"][1], item.pinball_machine[1]]);
+    const urls = ['https://acnhapi.com/v1/houseware/', 'https://acnhapi.com/v1/wallmounted/', 'https://acnhapi.com/v1/misc/'];
 
-        // adds a new property so we can filter them later
-        const withType = itemArray.map(piece => {
-          return { ...piece, type: "houseware" };
-        })
-        // sets state of housewares
-        setHousewares(withType);
+    const requests = urls.map((url) => {
+      return fetch(url)
+        .then((response) => {
+          return response.json();
+        });
+    });
+
+    // creating a promise to return all api calls at once
+    Promise.all(requests)
+      .then((jsonData) => {
+        const housewareObj = jsonData[0];
+        const wallmountedObj = jsonData[1];
+        const miscObj = jsonData[2];
+
+        // getting the specific items we want back
+        const housewareArray = [housewareObj.yucca[0], housewareObj.cat_tower[4], housewareObj["throwback_race-car_bed"][1], housewareObj.pinball_machine[1]];
+
+        const wallmountedArray = [wallmountedObj.cuckoo_clock[3], wallmountedObj.air_conditioner[2], wallmountedObj.corkboard[3], wallmountedObj.pot_rack[2]];
+
+        const miscArray = [miscObj.cute_music_player[0], miscObj.fancy_violin[0], miscObj.paper_tiger[0], miscObj.traditional_tea_set[1]];
+
+
+        // adding the "type" property
+        const housewareWithType = housewareArray.map(item => {
+          return { ...item, type: "houseware" };
+        });
+        const wallmountedWithType = wallmountedArray.map(item => {
+          return { ...item, type: "wallmounted" };
+        });
+        const miscWithType = miscArray.map(item => {
+          return { ...item, type: "misc" };
+        });
+
+        // combines all [type]withType arrays into one
+        const allWithType = [...housewareWithType, ...wallmountedWithType, ...miscWithType]
+
+        // setting allProducts to be all 12 items with the "type" property
+        setAllProducts(allWithType);
       });
   }, []);
 
 
-  // api call: wallmounted
-  useEffect(() => {
-    axios({
-      url: 'https://acnhapi.com/v1/wallmounted/',
-      method: 'GET',
-      responseType: 'json'
-    })
-      .then(response => {
-        const item = response.data
-
-        // creates array of the items we want to use from the response
-        const itemArray = ([item.cuckoo_clock[3], item.air_conditioner[2], item.corkboard[3], item.pot_rack[2]])
-
-        // adds a new property so we can filter them later
-        const withType = itemArray.map(piece => {
-          return { ...piece, type: "wallmounted" };
-        })
-
-        // sets state of wallmounted
-        setWallmounted(withType)
-      })
-  }, [])
-
-  // api call: misc
-  useEffect(() => {
-    axios({
-      url: 'https://acnhapi.com/v1/misc/',
-      method: 'GET',
-      responseType: 'json'
-    })
-      .then(response => {
-        const item = response.data
-        
-        // creates array of the items we want to use from the response
-        const itemArray = ([item.cute_music_player[0], item.fancy_violin[0], item.microwave[3], item.traditional_tea_set[1]]);
-
-        // adds a new property so we can filter them later
-        const withType = itemArray.map(piece => {
-          return { ...piece, type: "misc" };
-        })
-
-        // sets state of wallmounted
-        setMiscProduct(withType)
-      })
-  }, [])
 
 
 
-
-
-
-
+  // RETURN
   return (
     <>
 
@@ -128,6 +106,9 @@ function App() {
 
 
 
+
+
+
       {/* main begins */}
       <main>
         <div className="mainSection wrapper">
@@ -139,60 +120,14 @@ function App() {
           <section className="shopSection" id="shop">
             <h2>Items For Sale</h2>
             <ul className="productContainer wrapper">
+
               {/* renders the products to the page */}
-              {
-                housewares.map(item => {
-                  return (
-                    <Product
-                      id={item["file-name"]}
-                      name={item.name["name-USen"]}
-                      imagePath={item.image_uri}
-                      price={item["buy-price"]}
-                      size={item.size}
-                      colour={item.variant}
-                      tag={item.tag}
-                      sellPrice={item["sell-price"]}
-                      type="houseware"
-                    />
-                  );
-                })
-              }
+              {allProducts.map(item => {
+                return (
+                  <Product product={item} key={item["file-name"]} />
+                )
+              })}
 
-              {
-                wallmounted.map(item => {
-                  return (
-                    <Product
-                      id={item["file-name"]}
-                      name={item.name["name-USen"]}
-                      imagePath={item.image_uri}
-                      price={item["buy-price"]}
-                      size={item.size}
-                      colour={item.variant}
-                      tag={item.tag}
-                      sellPrice={item["sell-price"]}
-                      type="wallmounted"
-                    />
-                  );
-                })
-              }
-
-              {
-                miscProduct.map(item => {
-                  return (
-                    <Product
-                      id={item["file-name"]}
-                      name={item.name["name-USen"]}
-                      imagePath={item.image_uri}
-                      price={item["buy-price"]}
-                      size={item.size}
-                      colour={item.variant}
-                      tag={item.tag}
-                      sellPrice={item["sell-price"]}
-                      type="misc"
-                    />
-                  );
-                })
-              }
             </ul>
             {/* /productContainer */}
           </section>
