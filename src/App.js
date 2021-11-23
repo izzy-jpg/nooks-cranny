@@ -72,7 +72,6 @@ function App() {
         const miscWithType = miscArray.map(item => {
           return { ...item, type: "misc" };
         });
-        console.log(housewareWithType)
 
         // combines all [type]withType arrays into one
         const allWithType = [...housewareWithType, ...wallmountedWithType, ...miscWithType]
