@@ -59,14 +59,15 @@ header{
   background: #aae0e4;
 }
 
-nav{
-  width: 30%;
-}
 
 nav ul{
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+nav li{
+  margin-left: 10px;
 }
 
 .headerTop{

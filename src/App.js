@@ -115,7 +115,7 @@ function App() {
         <div className="headerImgTxt wrapper" id="topOfPage">
           <div className="headerTxt">
             <h1>Welcome to <span className="nooks">Nook's Cranny!</span> <span className="cranny">(...cranny!)</span></h1>
-            <a href="#shop" className="shopNow">Shop Now!</a>
+            <a href="#jumpToMain" className="shopNow">Shop Now!</a>
           </div>
           {/* /headerText */}
           <div className="headerImg">
@@ -133,7 +133,7 @@ function App() {
 
 
       {/* main begins */}
-      <main>
+      <main id="jumpToMain">
         <div className="mainSection wrapper">
           <section className="filterSection">
             <FilterForm getProducts={getProducts}/>
