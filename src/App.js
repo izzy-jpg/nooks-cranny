@@ -4,7 +4,7 @@
 import './App.css';
 import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch, faHome } from '@fortawesome/free-solid-svg-icons'
+import { faSearch, faHome, faBars } from '@fortawesome/free-solid-svg-icons'
 
 import Product from './Product';
 import FilterForm from './FilterForm';
@@ -97,6 +97,8 @@ function App() {
               <img src={"./assets/nooksCranny.png"} alt="the Nook's Cranny logo" />
             </div>
             {/* /logo */}
+            <div className="dropdown">
+              <button className="menu" aria-label="Menu"><FontAwesomeIcon icon={faBars} /></button>
             <nav>
               <ul>
                 <li className="home"><a href="#topOfPage" aria-label="Home"><FontAwesomeIcon icon={faHome} /></a></li>
@@ -104,6 +106,8 @@ function App() {
                 <li><button className="cart"><img src={"./assets/cartIcon.png"} alt="Your shopping cart" /></button></li>
               </ul>
             </nav>
+            </div>
+            {/* /dropdown */}
           </div>
           {/* /wrapper */}
         </div>
