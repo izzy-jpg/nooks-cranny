@@ -22,17 +22,18 @@ function App() {
     // create a copy of allProducts
     const copyOfAllProducts = [...allProducts];
 
+    // if the filter is 'all', return all products
     if (type === "all") {
       setFilteredProducts(copyOfAllProducts);
     } else{
-    // loop over it using filter()
+    // otherwise: loop over it using filter()
     const productsFiltered = copyOfAllProducts.filter(eachProduct => {
       // return only products that match
       return eachProduct.type === type;
     })
     setFilteredProducts(productsFiltered);
     };
-  }
+  };
 
 
   // api calls
@@ -136,6 +137,7 @@ function App() {
       <main id="jumpToMain">
         <div className="mainSection wrapper">
           <section className="filterSection">
+            {/* renders FilterForm component, passing getProducts in as a prop */}
             <FilterForm getProducts={getProducts}/>
           </section>
           {/* filterSection */}
@@ -154,7 +156,7 @@ function App() {
             </ul>
             {/* /productContainer */}
           </section>
-          {/* /shopSection #shop */}
+          {/* /shopSection */}
         </div>
         {/* /mainSection /wrapper */}
       </main>

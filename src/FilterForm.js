@@ -4,8 +4,10 @@ import { useState } from 'react';
 
 function FilterForm(props) {
 
+  // setting state
   const [userChoice, setUserChoice] = useState("all")
 
+  // retrieves the value of the chosen radio button on change
   const handleUserChoice = (e) => {
     setUserChoice(e.target.value);
   }
