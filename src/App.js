@@ -4,10 +4,11 @@
 import './App.css';
 import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch, faHome, faBars } from '@fortawesome/free-solid-svg-icons'
+import { faHome, faBars } from '@fortawesome/free-solid-svg-icons'
 
-import Product from './Product';
-import FilterForm from './FilterForm';
+import Product from './components/Product';
+import FilterForm from './components/FilterForm';
+import Firebase from './components/Firebase'
 
 // app function
 function App() {
@@ -16,22 +17,39 @@ function App() {
   const [filteredProducts, setFilteredProducts] = useState([]);
 
 
-  const getProducts = (e, type) => {
+  // Use effect to hold database info:
+  useEffect(() => {
+    // Variable to hold info from firebase
+    const dbRef = Firebase.database().ref();
 
-    e.preventDefault()
+    dbRef.on('value', (response) => {
+
+      // variable to hold data object from firebase
+      const data = response.val();
+
+      // Set the data to the state
+      console.log(data)
+    })
+
+  }, [])
+
+
+  const getProducts = (type) => {
+
+
     // create a copy of allProducts
     const copyOfAllProducts = [...allProducts];
 
     // if the filter is 'all', return all products
     if (type === "all") {
       setFilteredProducts(copyOfAllProducts);
-    } else{
-    // otherwise: loop over it using filter()
-    const productsFiltered = copyOfAllProducts.filter(eachProduct => {
-      // return only products that match
-      return eachProduct.type === type;
-    })
-    setFilteredProducts(productsFiltered);
+    } else {
+      // otherwise: loop over it using filter()
+      const productsFiltered = copyOfAllProducts.filter(eachProduct => {
+        // return only products that match
+        return eachProduct.type === type;
+      })
+      setFilteredProducts(productsFiltered);
     };
   };
 
@@ -51,6 +69,7 @@ function App() {
     // creating a promise to return all api calls at once
     Promise.all(requests)
       .then((jsonData) => {
+        console.log(jsonData);
         const housewareObj = jsonData[0];
         const wallmountedObj = jsonData[1];
         const miscObj = jsonData[2];
@@ -79,6 +98,7 @@ function App() {
 
         // setting allProducts to be all 12 items with the "type" property
         setAllProducts(allWithType);
+        setFilteredProducts(allWithType)
       });
   }, []);
 
@@ -100,13 +120,12 @@ function App() {
             {/* /logo */}
             <div className="dropdown">
               <button className="menu" aria-label="Menu"><FontAwesomeIcon icon={faBars} /></button>
-            <nav>
-              <ul>
-                <li className="home"><a href="#topOfPage" aria-label="Home"><FontAwesomeIcon icon={faHome} /></a></li>
-                <li><button className="search" aria-label="Search"><FontAwesomeIcon icon={faSearch} /></button></li>
-                <li><button className="cart"><img src={"./assets/cartIcon.png"} alt="Your shopping cart" /></button></li>
-              </ul>
-            </nav>
+              <nav>
+                <ul>
+                  <li className="home"><a href="#topOfPage" aria-label="Home"><FontAwesomeIcon icon={faHome} /></a></li>
+                  <li><button className="cart"><img src={"./assets/cartIcon.png"} alt="Your shopping cart" /></button></li>
+                </ul>
+              </nav>
             </div>
             {/* /dropdown */}
           </div>
@@ -138,7 +157,7 @@ function App() {
         <div className="mainSection wrapper">
           <section className="filterSection">
             {/* renders FilterForm component, passing getProducts in as a prop */}
-            <FilterForm getProducts={getProducts}/>
+            <FilterForm getProducts={getProducts} />
           </section>
           {/* filterSection */}
 
