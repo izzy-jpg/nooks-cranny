@@ -1,22 +1,16 @@
 
 // FilterForm.js
-import { useState, useEffect } from 'react';
 
 function FilterForm(props) {
 
-  // setting state
-  const [userChoice, setUserChoice] = useState('all')
   const filterBy = props.getProducts;
   
 
   // retrieves the value of the chosen radio button on change
   const handleUserChoice = (e) => {
-    setUserChoice(e.target.value);
+    filterBy(e.target.value);
   }
 
-  useEffect(() => {
-    filterBy(userChoice)
-  }, [userChoice])
 
 
 

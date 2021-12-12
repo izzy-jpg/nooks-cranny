@@ -6,43 +6,31 @@ import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHome, faBars } from '@fortawesome/free-solid-svg-icons'
 
-// import Product from './components/Product';
+// import components
 import FilterForm from './components/FilterForm';
 import Popup from './components/Popup'
-// import Firebase from './components/Firebase'
 
 // app function
 function App() {
   // setting states
   const [allProducts, setAllProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
-  const [cart, setCart] = useState([])
   const [toggleCart, setToggleCart] = useState(false);
+  const [cart, setCart] = useState([])
+  const [cartNumber, setCartNumber] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
-
-
   const [isOpen, setIsOpen] = useState(false);
 
+
+  // toggles the more info modal
   const toggleMoreInfo = () => {
     setIsOpen(!isOpen);
   }
 
-
-  // // Use effect to hold database info:
-  // useEffect(() => {
-  //   // Variable to hold info from firebase
-  //   const dbRef = Firebase.database().ref();
-
-  //   dbRef.on('value', (response) => {
-
-  //     // variable to hold data object from firebase
-  //     const data = response.val();
-
-  //     // Set the data to the state
-
-  //   })
-
-  // }, [])
+  // checks length of cart
+  useEffect(() => {
+    setCartNumber(cart.length)
+  }, [cart])
 
   // add to cart function
   const addToCart = (item) => {
@@ -145,9 +133,15 @@ function App() {
               <nav>
                 <ul>
                   <li className="home"><a href="#topOfPage" aria-label="Home"><FontAwesomeIcon icon={faHome} /></a></li>
-                  <li><button className="cart" onClick={() => setToggleCart(!toggleCart)}><img src={"./assets/cartIcon.png"} alt="Your shopping cart" /></button>
-                    {toggleCart ?
-                      <div className="cartOpen">
+                  <li>
+                    <div className="cartWithNumber">
+                      <button className="cart" onClick={() => setToggleCart(!toggleCart)}><img src={"./assets/cartIcon.png"} alt="Your shopping cart" /></button>
+                      <span className="cartNumber">{cartNumber}</span>
+                  </div>
+                  {/* if toggleCart is true */}
+                    {toggleCart 
+                    // return the following
+                      ? <div className="cartOpen">
                         <p className="cartHeader">Cart</p>
                         <div className="cartItems">
                           {
@@ -160,6 +154,7 @@ function App() {
 
                                 return (
                                   <div className="itemInCart" key={index}>
+                                    <div className="itemInfo">
                                     <p className="cartItemName">{itemName}</p>
                                     <div className="priceContainer">
                                       <div className="bells">
@@ -169,22 +164,26 @@ function App() {
                                       <p className="price">{itemPrice}</p>
                                     </div>
                                     {/* /priceContainer */}
-                                    <button className="removeItem" onClick={() => removeFromCart(item, index)}>remove</button>
+                                    </div>
+                                    {/* /itemInfo */}
+                                    <button className="removeItem" onClick={() => removeFromCart(item, index)}>X</button>
                                   </div>
+                                  // /itemInCart
                                 )
                               }))
-                              : <p className="noItems">There's nothing in your cart!</p>
+                              // otherwise display nothing
+                              : <p className="noItems">Add something!</p>
                           }
                         </div>
                         {/* /cartItems */}
                         <div className="totalPrice">
                           <p>Total:</p>
+                          <div className="priceContainer">
                           <div className="bells">
                             <img src="./assets/bells.png" alt="bells" />
                           </div>
                           {/* /bells */}
                           <p className="price">{totalPrice}</p>
-                          <div className="priceContainer">
                           </div>
                           {/* /priceContainer */}
                         </div>
