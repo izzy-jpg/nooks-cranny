@@ -14,10 +14,11 @@ function FilterForm(props) {
     setUserChoice(e.target.value);
   }
 
-
   useEffect(() => {
-      filterBy(userChoice);
+    filterBy(userChoice)
   }, [userChoice])
+
+
 
 
   return (

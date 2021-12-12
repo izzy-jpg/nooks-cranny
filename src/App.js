@@ -6,32 +6,55 @@ import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHome, faBars } from '@fortawesome/free-solid-svg-icons'
 
-import Product from './components/Product';
+// import Product from './components/Product';
 import FilterForm from './components/FilterForm';
-import Firebase from './components/Firebase'
+import Popup from './components/Popup'
+// import Firebase from './components/Firebase'
 
 // app function
 function App() {
   // setting states
   const [allProducts, setAllProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const [cart, setCart] = useState([])
+  const [toggleCart, setToggleCart] = useState(false);
+  const [totalPrice, setTotalPrice] = useState(0);
 
 
-  // Use effect to hold database info:
-  useEffect(() => {
-    // Variable to hold info from firebase
-    const dbRef = Firebase.database().ref();
+  const [isOpen, setIsOpen] = useState(false);
 
-    dbRef.on('value', (response) => {
+  const toggleMoreInfo = () => {
+    setIsOpen(!isOpen);
+  }
 
-      // variable to hold data object from firebase
-      const data = response.val();
 
-      // Set the data to the state
-      console.log(data)
-    })
+  // // Use effect to hold database info:
+  // useEffect(() => {
+  //   // Variable to hold info from firebase
+  //   const dbRef = Firebase.database().ref();
 
-  }, [])
+  //   dbRef.on('value', (response) => {
+
+  //     // variable to hold data object from firebase
+  //     const data = response.val();
+
+  //     // Set the data to the state
+
+  //   })
+
+  // }, [])
+
+  // add to cart function
+  const addToCart = (item) => {
+    setCart([...cart, item])
+    setTotalPrice(() => totalPrice + item["buy-price"])
+  };
+
+  // remove from cart function
+  const removeFromCart = (item, index) =>{
+    setCart(result => result.filter((_, i) => i !== index));
+    setTotalPrice(totalPrice - item["buy-price"])
+}
 
 
   const getProducts = (type) => {
@@ -69,7 +92,6 @@ function App() {
     // creating a promise to return all api calls at once
     Promise.all(requests)
       .then((jsonData) => {
-        console.log(jsonData);
         const housewareObj = jsonData[0];
         const wallmountedObj = jsonData[1];
         const miscObj = jsonData[2];
@@ -123,7 +145,55 @@ function App() {
               <nav>
                 <ul>
                   <li className="home"><a href="#topOfPage" aria-label="Home"><FontAwesomeIcon icon={faHome} /></a></li>
-                  <li><button className="cart"><img src={"./assets/cartIcon.png"} alt="Your shopping cart" /></button></li>
+                  <li><button className="cart" onClick={() => setToggleCart(!toggleCart)}><img src={"./assets/cartIcon.png"} alt="Your shopping cart" /></button>
+                    {toggleCart ?
+                      <div className="cartOpen">
+                        <p className="cartHeader">Cart</p>
+                        <div className="cartItems">
+                          {
+                            // if there is more than 0 items in the cart:
+                            cart.length > 0
+                            // map the items
+                              ? (cart.map((item, index) => {
+                                const itemName = item.name["name-USen"];
+                                const itemPrice = item["buy-price"];
+
+                                return (
+                                  <div className="itemInCart" key={index}>
+                                    <p className="cartItemName">{itemName}</p>
+                                    <div className="priceContainer">
+                                      <div className="bells">
+                                        <img src="./assets/bells.png" alt="bells" />
+                                      </div>
+                                      {/* /bells */}
+                                      <p className="price">{itemPrice}</p>
+                                    </div>
+                                    {/* /priceContainer */}
+                                    <button className="removeItem" onClick={() => removeFromCart(item, index)}>remove</button>
+                                  </div>
+                                )
+                              }))
+                              : <p className="noItems">There's nothing in your cart!</p>
+                          }
+                        </div>
+                        {/* /cartItems */}
+                        <div className="totalPrice">
+                          <p>Total:</p>
+                          <div className="bells">
+                            <img src="./assets/bells.png" alt="bells" />
+                          </div>
+                          {/* /bells */}
+                          <p className="price">{totalPrice}</p>
+                          <div className="priceContainer">
+                          </div>
+                          {/* /priceContainer */}
+                        </div>
+                        {/* /totalPrice */}
+                      </div>
+                      // /cartOpen
+                      : null
+                    }
+                  </li>
                 </ul>
               </nav>
             </div>
@@ -168,7 +238,74 @@ function App() {
               {/* renders the products to the page */}
               {filteredProducts.map(item => {
                 return (
-                  <Product product={item} key={item["file-name"]} />
+                  // posts products to the page
+                  <li className="product" key={item["file-name"]}>
+                    <div className="productImage">
+                      <img src={item.image_uri} alt={item.name["name-USen"]} />
+                    </div>
+                    {/* /imgButton */}
+                    <h3 className="productName">{item.name["name-USen"]}</h3>
+                    <div className="priceContainer">
+                      <div className="bells">
+                        <img src="./assets/bells.png" alt="bells" />
+                      </div>
+                      {/* /bells */}
+                      <p className="price">{item["buy-price"]}</p>
+                    </div>
+                    {/* /priceContainer */}
+                    <div className="buttonContainer">
+                      <button className="moreInfo" onClick={toggleMoreInfo}>more info</button>
+                      <button className="addToCart" onClick={() => addToCart(item)}>Add to cart</button>
+                    </div>
+                    {/* /buttonContainer */}
+
+                    {/* when isOpen=true, show Popup */}
+                    {isOpen ?
+                      <Popup content={
+                        <>
+                          <div className="imgButton">
+                            <div className="productImage">
+                              <img src={item.image_uri} alt={item.name["name-USen"]} />
+                            </div>
+                            {/* /productImage */}
+                            <button className="addToCart" onClick={() => addToCart(item)}>add to cart</button>
+                          </div>
+                          {/* /imgButton */}
+                          <div className="productInfo">
+                            <h3 className="productName">{item.name["name-USen"]}</h3>
+                            <div className="priceContainer">
+                              <div className="bells">
+                                <img src="./assets/bells.png" alt="bells" />
+                              </div>
+                              {/* /bells */}
+                              <p className="price">{item["buy-price"]}</p>
+                            </div>
+                            {/* /priceContainer */}
+                            <div className="extraInfo">
+                              <p>Category: {item.type}</p>
+                              <p>Size: {item.size}</p>
+                              <p>Tagged: {item.tag}</p>
+                              <div className="priceContainer">
+                                <p>Sells for: </p>
+                                <div className="bells">
+                                  <img src="./assets/bells.png" alt="bells" />
+                                </div>
+                                {/* /bells */}
+                                <p className="price">{item["sell-price"]}</p>
+                              </div>
+                              {/* /priceContainer */}
+                            </div>
+                            {/* /extraInfo */}
+                          </div>
+                          {/* /productInfo */}
+                        </>
+                      }
+                        handleClose={toggleMoreInfo}
+                      />
+                      // otherwise, show nothing
+                      : null
+                    }
+                  </li>
                 )
               })}
 
